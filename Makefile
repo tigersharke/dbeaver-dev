@@ -10,15 +10,15 @@ COMMENT=	Free universal database tool and SQL client
 
 LICENSE=	APACHE20
 
-BUILD_DEPENDS=  mvn:devel/maven
+BUILD_DEPENDS=	mvn:devel/maven
 
-USES=           desktop-file-utils
+USES=		desktop-file-utils
 
 USE_JAVA=	yes
 JAVA_VERSION=	11
-USE_GITHUB=     nodefault
-GH_ACCOUNT=     dbeaver
-GH_PROJECT=     dbeaver
+USE_GITHUB=	nodefault
+GH_ACCOUNT=	dbeaver
+GH_PROJECT=	dbeaver
 GH_TAGNAME=	5442d6d2690f2511131f394d8d060772475963c0
 
 WRKSRC=	${WRKDIR}/${PORTNAME}-${GH_TAGNAME}
@@ -27,17 +27,17 @@ WRKSRC=	${WRKDIR}/${PORTNAME}-${GH_TAGNAME}
 do-build:
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		${LOCALBASE}/bin/mvn ${MVN_ARGS} \
-		-fae install \
 		-Dmaven.deploy.skip=true \
-		-D=tycho.p2.transport=ecf
-#		package
+		-D=tycho.p2.transport=ecf \
+		package
+#		-fae install \
 #		-Duser.home=${WRKSRC} \
 # if the commad ended with the tycho line it succeeded except install?
 # Binaries are in product/community/target/products
 # databases/dbeaver/work/dbeaver-5442d6d2690f2511131f394d8d060772475963c0/product/community/target/products/org.jkiss.dbeaver.core.product/linux/gtk/x86_64/dbeaver
 #do-install:
 	# install jar
-	${INSTALL_DATA} ${WRKSRC}/target/Digital.jar ${STAGEDIR}${JAVAJARDIR}
+#	${INSTALL_DATA} ${WRKSRC}/target/Digital.jar ${STAGEDIR}${JAVAJARDIR}
 #	# install shell wrapper
 #	@(echo "#!/bin/sh"; \
 #	echo ""; \
