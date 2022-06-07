@@ -1,0 +1,1 @@
+This repo is intended to provide the contents of a FreeBSD ports tree leaf: /usr/ports/databases/dbeaver-dev so that those who desire may obtain and build their own. This will follow the github repo with updates as frequent as I am able, tied to commits there.
