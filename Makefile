@@ -1,5 +1,5 @@
 PORTNAME=	dbeaver
-DISTVERSION=	g20220601
+DISTVERSION=	g20220602
 CATEGORIES=	databases
 PKGNAMESUFFIX=	-dev
 DISTNAME=	${PORTNAME}-${GH_TAGNAME}
@@ -19,7 +19,7 @@ JAVA_VERSION=	11
 USE_GITHUB=	nodefault
 GH_ACCOUNT=	dbeaver
 GH_PROJECT=	dbeaver
-GH_TAGNAME=	739c878647df6a7d03731596a14fb48fa4ab88dc
+GH_TAGNAME=	328c723e284e0b032e5fe0707e8cc5a4d60c8223
 
 WRKSRC=	${WRKDIR}/${PORTNAME}-${GH_TAGNAME}
 
@@ -32,7 +32,9 @@ do-build:
 		package
 #		-fae install \
 #		-Duser.home=${WRKSRC} \
-# if the commad ended with the tycho line it succeeded except install?
+#
+# It seems that maven may need to eb freshly installed before this will build?  is this due to other issues with java/jdk?
+# if the command ended with the tycho line it succeeded except install?
 # Binaries are in product/community/target/products
 # databases/dbeaver/work/dbeaver-5442d6d2690f2511131f394d8d060772475963c0/product/community/target/products/org.jkiss.dbeaver.core.product/linux/gtk/x86_64/dbeaver
 #do-install:
