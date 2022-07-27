@@ -23,14 +23,14 @@ GH_TAGNAME=	9ef5f219c0402a695354253177fde310799882b8
 
 DATADIR=        ${PREFIX}/lib/eclipse/plugins
 
-EPLUGIN_ID=     org.jkiss.dbeaver.core.product
-EPLUGIN_VER=    ${PORTVERSION}
-
+#EPLUGIN_ID=     org.jkiss.dbeaver.core.product
+#EPLUGIN_VER=    ${PORTVERSION}
+#
 MVN_ARGS=	-e \
 		-D=tycho.p2.transport=ecf \
 		-Dmaven.deploy.skip=true
 
-FIND_HERE=      ${EPLUGIN_ID}_${EPLUGIN_VER}
+FIND_HERE=      ${WRKSRC}/product/community/target/products/org.jkiss.dbeaver.core.product
 FIND_COND=      -not ( -name README -or -name LICENSE )
 
 WRKSRC=	${WRKDIR}/${PORTNAME}-${GH_TAGNAME}
@@ -39,6 +39,13 @@ do-build:
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 	${LOCALBASE}/bin/mvn ${MVN_ARGS} eclipse:eclipse package
 	
+do-install:
+	@(cd ${WRKSRC} && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/lib/eclipse/plugins/${PORTNAME})
+#	@(cd ${WRKSRC} && ${COPYTREE_SHARE} . ${STAGEDIR}${PREFIX}/lib/eclipse/plugins/${DISTNAME})
+#	cd ${WRKSRC} && ${COPYTREE_SHARE} ${FIND_HERE} ${STAGEDIR} "${FIND_COND}"
+#	cd ${WRKSRC} && ${COPYTREE_SHARE} ${FIND_HERE} ${STAGEDIR}${DATADIR} "${FIND_COND}"
+
+
 # do- tasks found and modified from cad/digital on 20220605
 # The -o makes it all an offline operation, meaning no extra fetching.
 #do-build:
@@ -47,9 +54,7 @@ do-build:
 #		-Dmaven.deploy.skip=true \
 #		-D=tycho.p2.transport=ecf \
 #		package
-do-install:
-	cd ${WRKSRC} && ${COPYTREE_SHARE} ${FIND_HERE} ${STAGEDIR}${DATADIR} "${FIND_COND}"
-
+#
 #---------------------------------------------------------------------------------------------------
 # How to stop make from looking for a makefile as this uses maven for the build? an empty do-install.
 #
